@@ -10,6 +10,7 @@ angular.module('myApp', ['ngRoute'])
         ];
         $scope.predefinedInputs = [ "1W6", "2W6", "3W6", "1W20", "2W20", "3W20" ];
         $scope.results = [];
+        $scope.count = 1;
 
         var getDiceIndex = function(input) {
             var index = input.indexOf('D');
@@ -71,7 +72,7 @@ angular.module('myApp', ['ngRoute'])
             var dice = getDice(diceType);
 
             var result = {
-                "id": $scope.results.length + 1,
+                "id": $scope.count++,
                 "input": input,
                 "rolls": [],
                 "date": new Date(),
@@ -83,8 +84,17 @@ angular.module('myApp', ['ngRoute'])
             $scope.results.unshift(result);
         };
 
-
         $scope.clear = function() {
             $scope.results = [];
+            $scope.count = 1;
+        };
+
+        $scope.deleteResult = function(index) {
+            if (index > -1) {
+                $scope.results.splice(index, 1);
+            }
+            if ($scope.results.length === 0) {
+                $scope.clear();
+            }
         }
     }]);

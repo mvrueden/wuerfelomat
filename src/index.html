@@ -48,6 +48,7 @@
         </div>
 
         <div id="{{result.id}}" class="card mt-2" style="width: 20rem;" ng-repeat="result in results">
+            <button class="btn btn-sm btn-link" style="position: absolute; right: 0px" href="#" ng-click="deleteResult(results.indexOf(result))"><i class="fa fa-remove"></i></button>
             <div class="card-body pb-0">
                 <p class="card-subtitle small">{{result.id}}. Wurf <span class="text-muted ml-5">{{result.date | date: 'yyyy-MM-dd, HH:mm:ss'}}</span></p>
                 <p class="card-text">
