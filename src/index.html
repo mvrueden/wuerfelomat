@@ -44,6 +44,11 @@
             </div>
         </div>
 
+
+        <div style="width: 20rem;" class="small" ng-show="results.length  > 0">
+            Anzahl Würfe: {{results.length}}<span class="pull-right" ng-show="statistics.successRate >= 0">{{statistics.success}} erfolgreich <b>({{statistics.successRate * 100 | number: 2}}%)</b></span>
+        </div>
+
         <div id="{{result.id}}" class="card mt-2" style="width: 20rem;" ng-repeat="result in results">
             <button class="btn btn-sm btn-link" style="position: absolute; right: 0px" href="#" ng-click="deleteResult(results.indexOf(result))"><i class="fa fa-remove"></i></button>
             <div class="card-body pb-0" ng-class="{'alert-success': result.state === 'success', 'alert-danger': result.state === 'failure'}">

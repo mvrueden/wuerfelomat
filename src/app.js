@@ -50,6 +50,25 @@ angular.module('myApp', ['ngRoute'])
             }
         };
 
+        var updateStatistics = function() {
+            var total = 0;
+            var success = 0;
+            for (var i=0; i<$scope.results.length; i++) {
+                var result = $scope.results[i];
+                if (result.state !== undefined) {
+                    total++;
+                    if (result.state === 'success') {
+                        success++;
+                    }
+                }
+            }
+            $scope.statistics = {
+                total: total,
+                success: success,
+                successRate: success/total
+            };
+        };
+
         $scope.setInput = function(input) {
             $scope.input = input;
         };
@@ -82,11 +101,13 @@ angular.module('myApp', ['ngRoute'])
                 result.rolls.push(getRandomNumber(diceType));
             }
             $scope.results.unshift(result);
+            updateStatistics();
         };
 
         $scope.clear = function() {
             $scope.results = [];
             $scope.count = 1;
+            updateStatistics();
         };
 
         $scope.deleteResult = function(index) {
@@ -96,17 +117,20 @@ angular.module('myApp', ['ngRoute'])
             if ($scope.results.length === 0) {
                 $scope.clear();
             }
+            updateStatistics();
         };
 
         $scope.markSuccess = function(result) {
-            result.state = "success";
+            setState(result, "success");
         };
-
         $scope.markFailure = function(result) {
-            result.state = "failure";
+            setState(result, "failure");
         };
-
         $scope.resetState = function(result) {
-            result.state = undefined;
+            setState(result, undefined);
+        };
+        var setState = function(result, state) {
+            result.state = state;
+            updateStatistics();
         }
     }]);
