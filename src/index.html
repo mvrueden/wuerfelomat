@@ -58,7 +58,7 @@
                     <h4 style="width: 90%; float:left;">
                         <span ng-repeat="roll in result.rolls track by $index" ng-class="{'badge-danger': result.state === 'failure', 'badge-success': result.state === 'success'}" class="badge badge-{{result.dice.color}} mr-4">{{roll}}</span>
                     </h4>
-                    <div class="input-group dropup" style="width: 10%">
+                    <div class="input-group dropleft" style="width: 10%">
                         <button type="button" class="btn btn-sm btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bars"></i>
                         </button>
