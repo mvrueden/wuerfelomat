@@ -1,0 +1,56 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8"/>
+    <title>My Heldengenerator App</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular-route.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+    <script src="app.js"></script>
+    <link rel="stylesheet" href="app.css" />
+</head>
+<body ng-controller="MainController">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href=".">Würfel-O-Mat</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="pull-right">
+            <button class="btn btn-danger" title="Clear dice log" ng-click="clear()" ng-show="results.length > 0"><i class="fa fa-remove"></i></button>
+        </div>
+    </nav>
+
+    <div class="container-fluid main">
+        <div style="width: 20rem;">
+            <div class="alert alert-danger" ng-show="error">{{error}}</div>
+            <div class="input-group mb-2">
+                <input type="text" class="form-control" ng-model="input">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" ng-click="roll()">Roll!</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="{{result.id}}" class="card mt-2" style="width: 20rem;" ng-repeat="result in results">
+            <div class="card-body pb-0">
+                <p class="card-subtitle small">{{result.id}}. Wurf <span class="text-muted ml-5">{{result.date | date: 'yyyy-MM-dd, HH:mm:ss'}}</span></p>
+                <p class="card-text">
+                    <small>
+                    Es wurde <a href="#" ng-click="setInput(result.input)">{{result.input}}</a> gewürfelt. Einzelergebnisse: <br/>
+                    </small>
+                <h4><span ng-repeat="roll in result.rolls track by $index" class="badge badge-{{result.dice.color}} mr-4">{{roll}}</span></h4>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
