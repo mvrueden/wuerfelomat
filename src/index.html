@@ -49,13 +49,25 @@
 
         <div id="{{result.id}}" class="card mt-2" style="width: 20rem;" ng-repeat="result in results">
             <button class="btn btn-sm btn-link" style="position: absolute; right: 0px" href="#" ng-click="deleteResult(results.indexOf(result))"><i class="fa fa-remove"></i></button>
-            <div class="card-body pb-0">
+            <div class="card-body pb-0" ng-class="{'alert-success': result.state === 'success', 'alert-danger': result.state === 'failure'}">
                 <p class="card-subtitle small">{{result.id}}. Wurf <span class="text-muted ml-5">{{result.date | date: 'yyyy-MM-dd, HH:mm:ss'}}</span></p>
                 <p class="card-text">
                     <small>
                     Es wurde <a href="#" ng-click="setInput(result.input)">{{result.input}}</a> gewürfelt. Einzelergebnisse: <br/>
                     </small>
-                <h4><span ng-repeat="roll in result.rolls track by $index" class="badge badge-{{result.dice.color}} mr-4">{{roll}}</span></h4>
+                    <h4 style="width: 90%; float:left;">
+                        <span ng-repeat="roll in result.rolls track by $index" ng-class="{'badge-danger': result.state === 'failure', 'badge-success': result.state === 'success'}" class="badge badge-{{result.dice.color}} mr-4">{{roll}}</span>
+                    </h4>
+                    <div class="input-group dropup" style="width: 10%">
+                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="#" ng-click="markSuccess(result)">Mark Success</a>
+                            <a class="dropdown-item" href="#" ng-click="markFailure(result)">Mark Failure</a>
+                            <a class="dropdown-item" href="#" ng-click="resetState(result)">Reset</a>
+                        </div>
+                    </div>
                 </p>
             </div>
         </div>

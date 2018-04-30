@@ -96,5 +96,17 @@ angular.module('myApp', ['ngRoute'])
             if ($scope.results.length === 0) {
                 $scope.clear();
             }
+        };
+
+        $scope.markSuccess = function(result) {
+            result.state = "success";
+        };
+
+        $scope.markFailure = function(result) {
+            result.state = "failure";
+        };
+
+        $scope.resetState = function(result) {
+            result.state = undefined;
         }
     }]);
