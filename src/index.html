@@ -8,6 +8,7 @@
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular-route.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
@@ -34,6 +35,12 @@
             <div class="alert alert-danger" ng-show="error">{{error}}</div>
             <div class="input-group mb-2">
                 <input type="text" class="form-control" ng-model="input">
+                <div class="input-group-append" ng-show="predefinedInputs.length > 0">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Predefined</button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" ng-click="setInput(input)" ng-repeat="input in predefinedInputs">{{input}}</a>
+                    </div>
+                </div>
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="button" ng-click="roll()">Roll!</button>
                 </div>

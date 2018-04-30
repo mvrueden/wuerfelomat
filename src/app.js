@@ -8,6 +8,7 @@ angular.module('myApp', ['ngRoute'])
             { id: 6, name: 'd6', image: 'd6.png', description: "W6", color: "info" },
             { id: 20, name: 'd20', image: 'd20.jpg', description: "W20", color: "primary" }
         ];
+        $scope.predefinedInputs = [ "1W6", "2W6", "3W6", "1W20", "2W20", "3W20" ];
         $scope.results = [];
 
         var getDiceIndex = function(input) {
