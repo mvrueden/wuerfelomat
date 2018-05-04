@@ -36,7 +36,7 @@ angular.module('myApp', ['ngRoute'])
         };
 
         var getDice = function(diceType) {
-            var number = parseInt(diceType)
+            var number = parseInt(diceType);
             for (var i = 0; i<$scope.dices.length; i++) {
                 if ($scope.dices[i].id === number) {
                     return $scope.dices[i];
@@ -120,17 +120,18 @@ angular.module('myApp', ['ngRoute'])
             updateStatistics();
         };
 
-        $scope.markSuccess = function(result) {
-            setState(result, "success");
+        $scope.toggleSuccess = function(result) {
+            toggleState(result, "success");
         };
-        $scope.markFailure = function(result) {
-            setState(result, "failure");
+        $scope.toggleFailure = function(result) {
+            toggleState(result, 'failure');
         };
-        $scope.resetState = function(result) {
-            setState(result, undefined);
-        };
-        var setState = function(result, state) {
-            result.state = state;
+        var toggleState = function(result, state) {
+            if (result.state === state) {
+                result.state = undefined;
+            } else {
+                result.state = state;
+            }
             updateStatistics();
         }
     }]);

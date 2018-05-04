@@ -28,7 +28,7 @@
     </nav>
 
     <div class="container-fluid main">
-        <div style="width: 20rem;">
+        <div style="width: 22rem;">
             <div class="alert alert-danger" ng-show="error">{{error}}</div>
             <div class="input-group mb-2">
                 <input type="text" class="form-control" ng-model="input">
@@ -45,29 +45,32 @@
         </div>
 
 
-        <div style="width: 20rem;" class="small" ng-show="results.length  > 0">
+        <div style="width: 22rem;" class="small" ng-show="results.length  > 0">
             Anzahl Würfe: {{results.length}}<span class="pull-right" ng-show="statistics.successRate >= 0">{{statistics.success}} erfolgreich <b>({{statistics.successRate * 100 | number: 2}}%)</b></span>
         </div>
 
-        <div id="{{result.id}}" class="card mt-2" style="width: 20rem;" ng-repeat="result in results">
+        <div id="{{result.id}}" class="card mt-2" style="width: 22rem;" ng-repeat="result in results">
             <button class="btn btn-sm btn-link" style="position: absolute; right: 0px" href="#" ng-click="deleteResult(results.indexOf(result))"><i class="fa fa-remove"></i></button>
             <div class="card-body pb-0" ng-class="{'alert-success': result.state === 'success', 'alert-danger': result.state === 'failure'}">
-                <p class="card-subtitle small">{{result.id}}. Wurf <span class="text-muted ml-5">{{result.date | date: 'yyyy-MM-dd, HH:mm:ss'}}</span></p>
+                <div class="row small">
+                    <div class="col-3">{{result.id}}. Wurf</div>
+                    <div class="col-3"><a href="#" ng-click="setInput(result.input)">{{result.input}}</a></div>
+                    <div class="col-6 text-muted"><span class="pull-right">{{result.date | date: 'dd. MMM, HH:mm:ss'}}</span></div>
+                </div>
                 <p class="card-text">
-                    <small>
-                    Es wurde <a href="#" ng-click="setInput(result.input)">{{result.input}}</a> gewürfelt. Einzelergebnisse: <br/>
-                    </small>
-                    <h4 style="width: 90%; float:left;">
+                    <h4 style="width: 80%; float:left;">
                         <span ng-repeat="roll in result.rolls track by $index" ng-class="{'badge-danger': result.state === 'failure', 'badge-success': result.state === 'success'}" class="badge badge-{{result.dice.color}} mr-4">{{roll}}</span>
                     </h4>
-                    <div class="input-group dropleft" style="width: 10%">
-                        <button type="button" class="btn btn-sm btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="#" ng-click="markSuccess(result)">Mark Success</a>
-                            <a class="dropdown-item" href="#" ng-click="markFailure(result)">Mark Failure</a>
-                            <a class="dropdown-item" href="#" ng-click="resetState(result)">Reset</a>
+                    <div class="row" style="width: 20%">
+                        <div class="col-6">
+                            <button ng-click="toggleSuccess(result)" type="button" class="btn btn-sm" ng-class="{'btn-secondary': result.state === 'success'}">
+                                <i class="fa fa-thumbs-o-up"></i>
+                            </button>
+                        </div>
+                        <div class="col-6">
+                            <button ng-click="toggleFailure(result)" type="button" class="btn btn-sm" ng-class="{'btn-secondary': result.state === 'failure'}">
+                                <i class="fa fa-thumbs-o-down"></i>
+                            </button>
                         </div>
                     </div>
                 </p>
