@@ -9,6 +9,7 @@ angular.module('myApp', ['ngRoute'])
             { id: 20, name: 'd20', image: 'd20.jpg', description: "W20", color: "primary" }
         ];
         $scope.predefinedInputs = [ "1W6", "2W6", "3W6", "1W20", "2W20", "3W20" ];
+        $scope.featuredInputs = [ "1W6", "1W20", "3W20"];
         $scope.results = [];
         $scope.count = 1;
 
@@ -71,6 +72,13 @@ angular.module('myApp', ['ngRoute'])
 
         $scope.setInput = function(input) {
             $scope.input = input;
+        };
+
+        $scope.setInputAndRoll = function(input) {
+            if ($scope.input !== input) {
+                $scope.input = input;
+            }
+            $scope.roll();
         };
 
         $scope.roll = function() {

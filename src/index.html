@@ -30,6 +30,11 @@
     <div class="container-fluid main">
         <div style="width: 22rem;">
             <div class="alert alert-danger" ng-show="error">{{error}}</div>
+            <div class="mb-2" ng-if="featuredInputs.length > 0">
+                <span ng-repeat="input in featuredInputs" class="btn btn-link">
+                    <a href="#" ng-click="setInputAndRoll(input)">{{input}}</a>
+                </span>
+            </div>
             <div class="input-group mb-2">
                 <input type="text" class="form-control" ng-model="input">
                 <div class="input-group-append" ng-show="predefinedInputs.length > 0">
