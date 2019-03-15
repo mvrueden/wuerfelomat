@@ -1,0 +1,2 @@
+# Redirect default Netlify subdomain to primary domain
+http://unruffled-kowalevski-22d4a2.netlify.com/* http://dice.marskuh.de/:splat 301!
